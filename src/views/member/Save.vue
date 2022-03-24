@@ -43,7 +43,9 @@ export default {
     data() {
         return {
             member: {
+                regionalId:'1461218798756454402',
                 realName:'',
+                password:'123456',
                 sex:'',
                 age:'',
                 phone:'',
@@ -63,7 +65,7 @@ export default {
 
     methods: {
         saveOrUpdate() {
-
+            this.saveMember()
         },
 
         saveMember() {
