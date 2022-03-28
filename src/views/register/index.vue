@@ -1,13 +1,13 @@
 <template>
   <div class="login-container">
-    <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
-      <h3 class="title">区域疫情防控系统管理后台</h3>
+    <el-form ref="registerUser" class="login-form" auto-complete="on" label-position="left">
+      <h3 class="title">注册区域管理员</h3>
 
       <el-form-item prop="username">
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
-        <el-input v-model="loginForm.username" name="username" type="text" auto-complete="on" placeholder="账号" />
+        <el-input v-model="registerUser.username" name="username" type="text" auto-complete="on" placeholder="账号" />
       </el-form-item>
 
       <el-form-item prop="password">
@@ -16,24 +16,32 @@
         </span>
         <el-input
           :type="pwdType"
-          v-model="loginForm.password"
+          v-model="registerUser.password"
           name="password"
           auto-complete="on"
-          placeholder="密码"
-          @keyup.enter.native="handleLogin" />
+          placeholder="密码" />
+        <span class="show-pwd" @click="showPwd">
+          <svg-icon icon-class="eye" />
+        </span>
+      </el-form-item>
+
+      <el-form-item prop="confirmPwd">
+        <span class="svg-container">
+          <svg-icon icon-class="password" />
+        </span>
+        <el-input
+          :type="pwdType"
+          v-model="registerUser.confirmPwd"
+          name="password"
+          auto-complete="on"
+          placeholder="确认密码"/>
         <span class="show-pwd" @click="showPwd">
           <svg-icon icon-class="eye" />
         </span>
       </el-form-item>
 
       <el-form-item>
-        <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleLogin">
-          登 录
-        </el-button>
-      </el-form-item>
-
-      <el-form-item>
-        <el-button :loading="loading" type="primary" style="width:100%;" @click="handleRegister">
+        <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleRegister">
           注 册
         </el-button>
       </el-form-item>
@@ -46,33 +54,15 @@
 export default {
   name: 'Login',
   data() {
-    const validatePass = (rule, value, callback) => {
-      if (value.length < 5) {
-        callback(new Error('密码不能小于5位'))
-      } else {
-        callback()
-      }
-    }
     return {
-      loginForm: {
+      registerUser: {
         username: '',
-        password: ''
-      },
-      loginRules: {
-        username: [{ required: true, trigger: 'blur' }],
-        password: [{ required: true, trigger: 'blur', validator: validatePass }]
+        password: '',
+        confirmPwd: ''
       },
       loading: false,
       pwdType: 'password',
       redirect: undefined
-    }
-  },
-  watch: {
-    $route: {
-      handler: function(route) {
-        this.redirect = route.query && route.query.redirect
-      },
-      immediate: true
     }
   },
   methods: {
@@ -83,25 +73,8 @@ export default {
         this.pwdType = 'password'
       }
     },
-    handleLogin() {
-      this.$refs.loginForm.validate(valid => {
-        if (valid) {
-          this.loading = true
-          this.$store.dispatch('Login', this.loginForm).then(() => {
-            this.loading = false
-            this.$router.push({ path: this.redirect || '/' })
-          }).catch(() => {
-            this.loading = false
-          })
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
-    },
     handleRegister() {
-      console.log()
-      this.$router.push({ path: this.redirect || '/register' })
+
     }
   }
 }

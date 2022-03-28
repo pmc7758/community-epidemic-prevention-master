@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <el-button :disabled="saveBtnDisabled" type="primary" v-if="isShow" @click="save">添加区域信息</el-button>
+    <el-button v-if="isShow" :disabled="saveBtnDisabled" type="primary" @click="save">添加区域信息</el-button>
     <div class="dashboard-text">管理员id:{{ id }}</div>
     <div class="dashboard-text">管理员姓名:{{ name }}</div>
     <div class="dashboard-text">管理员角色:<span v-for="role in roles" :key="role">{{ role }}</span></div>
@@ -14,6 +14,7 @@ import { mapGetters } from 'vuex'
 import regional from '@/api/regional/regional'
 
 export default {
+  name: 'Dashboard',
   data() {
     return {
       isShow: false,
@@ -23,7 +24,6 @@ export default {
       }
     }
   },
-  name: 'Dashboard',
   computed: {
     ...mapGetters([
       'name',
@@ -47,7 +47,7 @@ export default {
           }
         })
     }
-  },
+  }
 }
 </script>
 

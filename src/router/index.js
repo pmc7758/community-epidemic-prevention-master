@@ -24,6 +24,7 @@ import Layout from '../views/layout/Layout'
 export const constantRoutes = [
   { path: '/login', component: () => import('@/views/login/index'), hidden: true },
   { path: '/404', component: () => import('@/views/404'), hidden: true },
+  { path: '/register', component: () => import('@/views/register/index'), hidden: true },
 
   // 首页
   {
@@ -34,7 +35,7 @@ export const constantRoutes = [
     children: [{
       path: 'dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: {title: '区域信息', icon: '区域'}
+      meta: { title: '区域信息', icon: '区域' }
     }]
   },
 
@@ -49,7 +50,7 @@ export const constantRoutes = [
       {
         path: 'table',
         name: '社员列表',
-        component: () => import('@/views/member/List'),// 点击后要显示的页面路径
+        component: () => import('@/views/member/List'), // 点击后要显示的页面路径
         meta: { title: '社员列表', icon: '人员列表' }
       },
       {
@@ -79,7 +80,7 @@ export const constantRoutes = [
       {
         path: 'table',
         name: '视频列表',
-        component: () => import('@/views/vod/VodList'),// 点击后要显示的页面路径
+        component: () => import('@/views/vod/VodList'), // 点击后要显示的页面路径
         meta: { title: '视频列表', icon: '视频列表' }
       },
       {
@@ -94,7 +95,7 @@ export const constantRoutes = [
         component: () => import('@/views/vod/VodSave'),
         meta: { title: '编辑视频', icon: '修改' },
         hidden: true
-      },
+      }
     ]
   },
 
@@ -111,7 +112,7 @@ export const constantRoutes = [
         name: '记录列表',
         component: () => import('@/views/temperature/TempList'), // 点击后要显示的页面路径
         meta: { title: '出行记录', icon: '出行记录' }
-      },
+      }
     ]
   },
 
@@ -126,7 +127,7 @@ export const constantRoutes = [
       {
         path: 'table',
         name: '货物列表',
-        component: () => import('@/views/goods/GoodsList'),// 点击后要显示的页面路径
+        component: () => import('@/views/goods/GoodsList'), // 点击后要显示的页面路径
         meta: { title: '货物列表', icon: '列表' }
       },
       {
@@ -141,10 +142,9 @@ export const constantRoutes = [
         component: () => import('@/views/goods/Save'),
         meta: { title: '编辑货物', icon: '修改' },
         hidden: true
-      },
+      }
     ]
   },
-
 
   // 核酸检测管理
   {
@@ -157,20 +157,18 @@ export const constantRoutes = [
       {
         path: 'table',
         name: '核酸记录',
-        component: () => import('@/views/nucleic/NucleicList'),// 点击后要显示的页面路径
+        component: () => import('@/views/nucleic/NucleicList'), // 点击后要显示的页面路径
         meta: { title: '核酸记录', icon: '检测' }
-      },
+      }
     ]
-  },
+  }
 
 ]
 
-
-/* 
+/*
   动态路由
 */
 export const asyncRoutes = [
-
 
   // 权限管理
   {

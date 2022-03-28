@@ -25,7 +25,7 @@ export function getInfo(token) {
 
 // 登出
 export function logout() {
-  //debugger
+  // debugger
   return request({
     url: '/admin/acl/index/logout',
     method: 'post'
