@@ -46,21 +46,14 @@
 export default {
   name: 'Login',
   data() {
-    const validatePass = (rule, value, callback) => {
-      if (value.length < 8) {
-        callback(new Error('密码不能小于8位'))
-      } else {
-        callback()
-      }
-    }
     return {
       loginForm: {
         username: '',
         password: ''
       },
       loginRules: {
-        username: [{ required: true, trigger: 'blur' }],
-        password: [{ required: true, trigger: 'blur', validator: validatePass }]
+        username: [{ required: true, trigger: 'blur', message: '账号不能为空' }],
+        password: [{ required: true, trigger: 'blur', message: '密码不能为空' }]
       },
       loading: false,
       pwdType: 'password',
@@ -76,6 +69,7 @@ export default {
     }
   },
   methods: {
+    // 密码查看
     showPwd() {
       if (this.pwdType === 'password') {
         this.pwdType = ''
@@ -83,6 +77,7 @@ export default {
         this.pwdType = 'password'
       }
     },
+    // 登录方法
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
@@ -99,6 +94,7 @@ export default {
         }
       })
     },
+    // 跳转注册页
     handleRegister() {
       console.log()
       this.$router.push('/register')

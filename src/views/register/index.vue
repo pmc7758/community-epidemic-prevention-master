@@ -1,6 +1,6 @@
 <template>
-  <div class="login-container">
-    <el-form ref="registerUser" class="login-form" auto-complete="on" label-position="left">
+  <div class="register-container">
+    <el-form ref="registerUser" :model="registerUser" :rules="registerRules" class="register-form" auto-complete="on" label-position="left">
       <h3 class="title">注册区域管理员</h3>
 
       <el-form-item prop="username">
@@ -8,6 +8,13 @@
           <svg-icon icon-class="user" />
         </span>
         <el-input v-model="registerUser.username" name="username" type="text" auto-complete="on" placeholder="账号" />
+      </el-form-item>
+
+      <el-form-item prop="email">
+        <span class="svg-container">
+          <svg-icon icon-class="邮箱" />
+        </span>
+        <el-input v-model="registerUser.email" name="email" type="text" auto-complete="on" placeholder="邮箱" />
       </el-form-item>
 
       <el-form-item prop="password">
@@ -42,7 +49,13 @@
 
       <el-form-item>
         <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleRegister">
-          注 册
+          邮 箱 激 活
+        </el-button>
+      </el-form-item>
+
+      <el-form-item>
+        <el-button type="primary" style="width:100%;" @click="toLogin">
+          登 录
         </el-button>
       </el-form-item>
 
@@ -52,13 +65,35 @@
 
 <script>
 export default {
-  name: 'Login',
+  name: 'Register',
   data() {
+    // 邮箱校验规则
+    const checkEmail = (rule, value, callback) => {
+      const emailReg = /^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/
+      if (emailReg.test(value) || value === '') {
+        return callback()
+      } else {
+        callback(new Error('邮箱格式错误'))
+      }
+    }
     return {
       registerUser: {
         username: '',
+        email: '',
         password: '',
         confirmPwd: ''
+      },
+      registerRules: {
+        username: [{ required: true, trigger: 'blur', message: '账号不能为空' },
+          { min: 3, max: 10, message: '长度在 3 到 10 个字符之间', trigger: 'blur' }],
+
+        email: [{ required: true, trigger: 'blur', message: '邮箱不能为空' },
+          { trigger: 'blur', validator: checkEmail, message: '邮箱格式不对' }],
+
+        password: [{ required: true, trigger: 'blur', message: '密码不能为空' },
+          { min: 8, max: 20, message: '长度在 8 到 20 个字符之间', trigger: 'blur' }],
+
+        confirmPwd: [{ required: true, trigger: 'blur', message: '确认密码不能为空' }]
       },
       loading: false,
       pwdType: 'password',
@@ -66,6 +101,7 @@ export default {
     }
   },
   methods: {
+    // 密码暗文查看
     showPwd() {
       if (this.pwdType === 'password') {
         this.pwdType = ''
@@ -73,8 +109,15 @@ export default {
         this.pwdType = 'password'
       }
     },
+
+    // 邮箱激活注册
     handleRegister() {
 
+    },
+
+    // 登录跳转
+    toLogin() {
+      this.$router.push('/login')
     }
   }
 }
@@ -85,7 +128,7 @@ $bg:#2d3a4b;
 $light_gray:#eee;
 
 /* reset element-ui css */
-.login-container {
+.register-container {
   .el-input {
     display: inline-block;
     height: 47px;
@@ -118,12 +161,12 @@ $light_gray:#eee;
 $bg:#2d3a4b;
 $dark_gray:#889aa4;
 $light_gray:#eee;
-.login-container {
+.register-container {
   position: fixed;
   height: 100%;
   width: 100%;
   background-color: $bg;
-  .login-form {
+  .register-form {
     position: absolute;
     left: 0;
     right: 0;
