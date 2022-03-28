@@ -47,8 +47,8 @@ export default {
   name: 'Login',
   data() {
     const validatePass = (rule, value, callback) => {
-      if (value.length < 5) {
-        callback(new Error('密码不能小于5位'))
+      if (value.length < 8) {
+        callback(new Error('密码不能小于8位'))
       } else {
         callback()
       }
@@ -101,7 +101,7 @@ export default {
     },
     handleRegister() {
       console.log()
-      this.$router.push({ path: this.redirect || '/register' })
+      this.$router.push('/register')
     }
   }
 }
