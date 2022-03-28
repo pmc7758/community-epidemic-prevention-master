@@ -29,6 +29,9 @@ const user = {
     },
     SET_ID: (state, id) => {
       state.id = id
+    },
+    SET_EMAIL: (state, email) => {
+      state.email = email
     }
   },
 
@@ -49,7 +52,7 @@ const user = {
         })
       })
     },
-
+    // 登录后拿token去拿个人信息
     async GetInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
         getInfo(state.token).then(response => {
@@ -70,6 +73,7 @@ const user = {
           commit('SET_AVATAR', data.avatar)
           commit('SET_BUTTONS', buttonAuthList)
           commit('SET_ID', data.id)
+          commit('SET_EMAIL', data.email)
           resolve(response)
         }).catch(error => {
           reject(error)

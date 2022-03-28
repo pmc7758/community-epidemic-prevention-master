@@ -1,11 +1,16 @@
 <template>
   <div class="dashboard-container">
-    <el-button v-if="isShow" :disabled="saveBtnDisabled" type="primary" @click="save">添加区域信息</el-button>
-    <div class="dashboard-text">管理员id:{{ id }}</div>
-    <div class="dashboard-text">管理员姓名:{{ name }}</div>
-    <div class="dashboard-text">管理员角色:<span v-for="role in roles" :key="role">{{ role }}</span></div>
-    <div v-if="!isShow" class="dashboard-text">社区地址:{{ regionalInfo.address }}</div>
-    <div v-if="!isShow" class="dashboard-text">社区风险级别:{{ regionalInfo.riskLevel }}</div>
+    <el-descriptions id="adminDES" title="管理员信息" direction="vertical" border>
+      <el-descriptions-item label="管理员账号">{{ name }}</el-descriptions-item>
+      <el-descriptions-item label="管理员邮箱">{{ email }}</el-descriptions-item>
+      <el-descriptions-item label="管理员角色">{{ role }}</el-descriptions-item>
+    </el-descriptions>
+    <el-descriptions title="社区信息" direction="vertical" border>
+      <el-descriptions-item label="社区风险级别">
+        <el-tag size="small">{{ regionalInfo.riskLevel }}</el-tag>
+      </el-descriptions-item>
+      <el-descriptions-item label="社区地址">{{ regionalInfo.address }}</el-descriptions-item>
+    </el-descriptions>
   </div>
 </template>
 
@@ -28,7 +33,8 @@ export default {
     ...mapGetters([
       'name',
       'roles',
-      'id'
+      'id',
+      'email'
     ])
   },
 
@@ -37,8 +43,9 @@ export default {
   },
 
   methods: {
+    // 查询社区信息
     getRegionalInfo() {
-      regional.getRegional(this.id)
+      regional.getRegional(1)
         .then(response => {
           if (response.data == null) {
             this.isShow = true
@@ -60,5 +67,8 @@ export default {
     font-size: 30px;
     line-height: 46px;
   }
+}
+#adminDES{
+  margin-bottom: 50px;
 }
 </style>
