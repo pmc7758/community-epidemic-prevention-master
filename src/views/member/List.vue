@@ -14,6 +14,30 @@
       <el-form-item>
         <el-button type="primary" @click="getMemberListByPage()">查询</el-button>
       </el-form-item>
+
+      <el-form-item>
+        <el-button type="primary">
+          <a href="@/../static/社员批量导入模块.xlsx" target="_blank" download="社员批量导入模块.xlsx">下载批量导入文件模板</a>
+        </el-button>
+      </el-form-item>
+
+      <el-form-item>
+        <el-upload
+          ref="uploadFile"
+          :limit="1"
+          :on-success="handleSuccess"
+          :action="BASE_API + '/pac/member/saveBatchMember/' + memberQuery.regionalId"
+          class="upload-demo"
+          multiple>
+          <el-button type="primary">点击上传批量导入文件</el-button>
+          <el-tooltip placement="right-end">
+            <div slot="content">
+              只能上传导入模块文件，请先下载模块文件
+            </div>
+            <i class="el-icon-question"/>
+          </el-tooltip>
+        </el-upload>
+      </el-form-item>
     </el-form>
 
     <el-table
@@ -27,7 +51,7 @@
 
       <el-table-column label="性别" width="80" prop="sex" align="center">
         <template slot-scope="scope">
-          {{ scope.sex=='1'?'男':'女' }}
+          {{ scope.row.sex === 2 ? '男' : '女' }}
         </template>
       </el-table-column>
 
@@ -74,6 +98,7 @@ import member from '@/api/member/list'
 export default {
   data() { // 定义变量和初始值
     return {
+      BASE_API: process.env.BASE_API, // 接口API地址,localhost:8222这个地址
       memberList: null,
       total: 0, // 总记录数
       current: 1, // 当前页
@@ -99,7 +124,6 @@ export default {
         .then(response => { // 成功后数据赋值给页面初始值
           this.memberList = response.data.records
           this.total = response.data.total
-          console.log(this.memberList)
         })
         .catch(error => { // 失败
           console.log(error)
@@ -124,6 +148,17 @@ export default {
             this.getMemberListByPage()
           })
       })
+    },
+
+    // 批量导入
+    handleSuccess() {
+      this.$refs.uploadFile.clearFiles()
+      this.$message({
+        type: 'success',
+        message: '批量导入成功!'
+      })
+      // 刷新
+      this.getMemberListByPage()
     }
 
   }

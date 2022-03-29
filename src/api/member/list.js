@@ -11,7 +11,7 @@ export default{
     })
   },
 
-  // 删除讲师
+  // 删除社员
   deleteMemberById(id) {
     return request({
       url: `/pac/member/deleteMemberById/${id}`,
@@ -19,10 +19,10 @@ export default{
     })
   },
 
-  // 添加讲师
-  addMember(member) {
+  // 添加社员
+  addOrUpdateMember(flag, member) {
     return request({
-      url: `/pac/member/addMember`, // 接口地址
+      url: `/pac/member/addMember/${flag}`, // 接口地址
       method: 'post', // 提交方式
       data: member // 用data表示用json传递，后端（@RequestBody）才能接收
     })

@@ -33,7 +33,7 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button :loading="loading" type="primary" style="width:100%;" @click="handleRegister">
+        <el-button type="primary" style="width:100%;" @click="handleRegister">
           注 册
         </el-button>
       </el-form-item>
@@ -48,8 +48,8 @@ export default {
   data() {
     return {
       loginForm: {
-        username: '',
-        password: ''
+        username: '1',
+        password: '1'
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', message: '账号不能为空' }],
