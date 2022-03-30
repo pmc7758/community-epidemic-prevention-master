@@ -97,7 +97,13 @@ export default {
 
   methods: {
     saveOrUpdate() {
-      this.saveMember()
+      this.$refs['member'].validate((valid) => {
+        if (valid) {
+          this.saveMember()
+        } else {
+          return false
+        }
+      })
     },
 
     saveMember() {

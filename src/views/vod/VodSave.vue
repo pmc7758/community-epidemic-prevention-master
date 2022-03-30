@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
-    <el-form label-width="80px">
-      <el-form-item label="视频标题">
+    <el-form ref="vod" :model="vod" :rules="vodRules" label-width="80px">
+      <el-form-item prop="title" label="视频标题">
         <el-input v-model="vod.title"/>
       </el-form-item>
 
@@ -29,7 +29,6 @@
 
       <el-form-item>
         <el-button :disabled="saveBtnDisabled" type="primary" @click="saveOrUpdateVideo">立即发布</el-button>
-        <el-button>取消</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -41,12 +40,19 @@ import vodApi from '@/api/vod/vod'
 export default {
   data() {
     return {
+      timer: null,
+      vodRules: {
+        title: [{ required: true, trigger: 'blur', message: '标题不能为空' },
+          { max: 20, message: '长度在 20 个字符之内', trigger: 'blur' }]
+      },
       vod: {
         title: '',
         videoSourceId: '',
-        videoOriginalName: ''
+        videoOriginalName: '',
+        regionalId: '1461218798756454402',
+        duration: ''
       },
-      saveBtnDisabled: false,
+      saveBtnDisabled: true,
       fileList: [], // 上传文件列表
       BASE_API: process.env.BASE_API // 接口API地址,localhost:8222这个地址
     }
@@ -64,8 +70,17 @@ export default {
     // 上传视频成功后拿到视频id
     handleVodUploadSuccess(response, file, fileList) {
       this.vod.videoSourceId = response.data
-      console.log(this.vod.videoSourceId)
       this.vod.videoOriginalName = file.name
+      clearTimeout(this.timer) // 清除延迟执行
+
+      this.timer = setTimeout(() => { // 设置延迟执行
+        vodApi.getVodInfo(this.vod.videoSourceId)
+          .then(response => {
+            this.vod.duration = response.data.duration
+            console.log(response.data.duration)
+          })
+      }, 4000)
+      this.saveBtnDisabled = false
     },
 
     // 上传之前调用的方法
@@ -75,16 +90,22 @@ export default {
 
     // 保存视频信息
     saveOrUpdateVideo() {
-      vodApi.addVideo(this.vod)
-        .then(response => {
-          // 提示信息
-          this.$message({
-            type: 'success',
-            message: '添加成功!'
-          })
-          // 回到列表页 路由跳转
-          this.$router.push({ path: '/video/table' })
-        })
+      this.$refs['vod'].validate((valid) => {
+        if (valid) {
+          vodApi.addVideo(this.vod)
+            .then(response => {
+              // 提示信息
+              this.$message({
+                type: 'success',
+                message: '添加成功!'
+              })
+              // 回到列表页 路由跳转
+              this.$router.push({ path: '/video/table' })
+            })
+        } else {
+          return false
+        }
+      })
     },
 
     getVideoInfo(id) {

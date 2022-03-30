@@ -98,7 +98,7 @@ export default {
         .then(response => { // 成功后数据赋值给页面初始值
           this.goodsList = response.data.records
           this.total = response.data.total
-          console.log(this.goodsList)
+          console.log(this.total)
         })
         .catch(error => { // 失败
           console.log(error)

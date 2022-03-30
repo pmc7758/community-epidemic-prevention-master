@@ -55,6 +55,8 @@
 
       <el-table-column prop="duration" label="视频时长" align="center"/>
 
+      <el-table-column prop="createTime" label="上传日期" align="center"/>
+
       <el-table-column label="操作" align="center">
         <template slot-scope="scope">
           <el-button
@@ -130,7 +132,6 @@ export default {
         .then(response => { // 成功后数据赋值给页面初始值
           this.vodList = response.data.records
           this.total = response.data.total
-          console.log(this.vodList)
         })
         .catch(error => { // 失败
           console.log(error)

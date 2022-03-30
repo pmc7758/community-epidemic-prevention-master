@@ -1,19 +1,19 @@
 <template>
   <div class="app-container">
-    <el-form label-width="100px">
-      <el-form-item label="商品名称">
+    <el-form ref="goods" :model="goods" :rules="goodsRules" label-width="100px">
+      <el-form-item prop="tradeName" label="商品名称">
         <el-input v-model="goods.tradeName"/>
       </el-form-item>
 
-      <el-form-item label="商品描述">
+      <el-form-item prop="introduction" label="商品描述">
         <el-input v-model="goods.introduction"/>
       </el-form-item>
 
-      <el-form-item label="库存">
+      <el-form-item prop="stock" label="库存">
         <el-input v-model="goods.stock"/>
       </el-form-item>
 
-      <el-form-item label="商品图片">
+      <el-form-item prop="picture" label="商品图片">
         <el-upload
           :on-success="handlePictureUploadSuccess"
           :on-remove="handlePicRemove"
@@ -31,7 +31,7 @@
         </el-upload>
       </el-form-item>
 
-      <el-form-item label="资质图">
+      <el-form-item prop="auditQualification" label="资质图">
         <el-upload
           :limit="1"
           :on-remove="handleAuRemove"
@@ -51,7 +51,6 @@
 
       <el-form-item>
         <el-button :disabled="saveBtnDisabled" type="primary" @click="saveGoods">立即保存</el-button>
-        <el-button>取消</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -72,6 +71,14 @@ export default {
         stock: '',
         auditQualification: ''
       },
+      goodsRules: {
+        tradeName: [{ required: true, trigger: 'blur', message: '商品名称不能为空' },
+          { max: 20, message: '长度在 20 个字符之内', trigger: 'blur' }],
+        introduction: [{ required: true, trigger: 'blur', message: '商品描述不能为空' }],
+        stock: [{ required: true, trigger: 'blur', message: '库存不能为空' }],
+        auditQualification: [{ required: true, trigger: 'blur', message: '请上传资质图' }],
+        picture: [{ required: true, trigger: 'blur', message: '请上传商品图片' }]
+      },
       pictureList: [], // 上传文件列表
       fileList: [],
       BASE_API: process.env.BASE_API,
@@ -89,16 +96,22 @@ export default {
   methods: {
 
     saveGoods() {
-      goodsAPI.addgoods(this.goods)
-        .then(response => {
-          // 提示信息
-          this.$message({
-            type: 'success',
-            message: '添加成功!'
-          })
-          // 回到列表页 路由跳转
-          this.$router.push({ path: '/goods/table' })
-        })
+      this.$refs['goods'].validate((valid) => {
+        if (valid) {
+          goodsAPI.addgoods(this.goods)
+            .then(response => {
+              // 提示信息
+              this.$message({
+                type: 'success',
+                message: '添加成功!'
+              })
+              // 回到列表页 路由跳转
+              this.$router.push({ path: '/goods/table' })
+            })
+        } else {
+          return false
+        }
+      })
     },
 
     // 上传图片成功后拿到图片url

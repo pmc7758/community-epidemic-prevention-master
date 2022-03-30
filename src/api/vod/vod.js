@@ -50,6 +50,14 @@ export default{
       url: `/vod/video/getPlayAuth/${vid}`,
       method: 'get'
     })
+  },
+
+  // 根据云端视频id获取视频信息
+  getVodInfo(videoSourceId) {
+    return request({
+      url: `/vod/video/getVodInfo/${videoSourceId}`,
+      method: 'get'
+    })
   }
 
 }

@@ -32,7 +32,7 @@
           <el-button type="primary">点击上传批量导入文件</el-button>
           <el-tooltip placement="right-end">
             <div slot="content">
-              只能上传导入模块文件，请先下载模块文件
+              只能上传模块文件，请先下载模块文件
             </div>
             <i class="el-icon-question"/>
           </el-tooltip>
