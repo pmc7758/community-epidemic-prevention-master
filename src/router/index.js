@@ -158,6 +158,23 @@ export const constantRoutes = [
         meta: { title: '核酸记录', icon: '检测' }
       }
     ]
+  },
+
+  // 社员接种疫苗管理
+  {
+    path: '/vaccines',
+    component: Layout,
+    redirect: '/vaccines/table',
+    name: '疫苗记录', // 名字注释
+    meta: { title: '疫苗记录', icon: '疫苗' }, // 显示和图标
+    children: [
+      {
+        path: 'table',
+        name: '疫苗记录',
+        component: () => import('@/views/vaccines/VaccinesList'), // 点击后要显示的页面路径
+        meta: { title: '疫苗记录', icon: '疫苗' }
+      }
+    ]
   }
 
 ]
