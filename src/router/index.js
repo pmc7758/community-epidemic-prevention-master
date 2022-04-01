@@ -36,6 +36,30 @@ export const constantRoutes = [
     }]
   },
 
+  // 社区公告管理
+  {
+    path: '/notice',
+    component: Layout,
+    redirect: '/notice/table',
+    name: '社区公告', // 名字注释
+    meta: { title: '社区公告', icon: '公告' }, // 显示和图标
+    children: [
+      {
+        path: 'table',
+        name: '社区公告',
+        component: () => import('@/views/notice/index'), // 点击后要显示的页面路径
+        meta: { title: '社区公告', icon: '公告' }
+      },
+      {
+        path: 'edit/:id',
+        name: '修改公告',
+        component: () => import('@/views/notice/index'),
+        meta: { title: '修改公告', icon: '修改' },
+        hidden: true
+      }
+    ]
+  },
+
   // 社员管理
   {
     path: '/members',
