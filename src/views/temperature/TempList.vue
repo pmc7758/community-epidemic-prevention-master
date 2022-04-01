@@ -28,7 +28,7 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click="getTemplListByPage()">查询</el-button>
+        <el-button type="primary" icon="el-icon-search" @click="getTemplListByPage()">查询</el-button>
       </el-form-item>
 
       <el-form-item>
@@ -54,7 +54,7 @@
 
       <el-table-column prop="area" label="目前所在地" align="center"/>
 
-      <el-table-column prop="area" label="准备去往地" align="center"/>
+      <el-table-column prop="destination" label="准备去往地" align="center"/>
 
     </el-table>
 
@@ -102,8 +102,6 @@ export default {
         .then(response => { // 成功后数据赋值给页面初始值
           this.infoList = response.data.records
           this.total = response.data.total
-          console.log(this.total)
-          console.log(this.infoList)
         })
         .catch(error => { // 失败
           console.log(error)
@@ -118,7 +116,6 @@ export default {
         .then(response => { // 成功后数据赋值给页面初始值
           this.infoList = response.data.records
           this.total = response.data.total
-          console.log(this.infoList)
         })
         .catch(error => { // 失败
           console.log(error)

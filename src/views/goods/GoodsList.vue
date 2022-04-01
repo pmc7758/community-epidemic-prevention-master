@@ -8,7 +8,7 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click="getGoodsListByPage()">查询</el-button>
+        <el-button type="primary" icon="el-icon-search" @click="getGoodsListByPage()">查询</el-button>
       </el-form-item>
     </el-form>
 

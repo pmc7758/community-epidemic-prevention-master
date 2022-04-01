@@ -12,7 +12,7 @@
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click="getMemberListByPage()">查询</el-button>
+        <el-button type="primary" icon="el-icon-search" @click="getMemberListByPage()">查询</el-button>
       </el-form-item>
 
       <el-form-item>
@@ -29,7 +29,7 @@
           :action="BASE_API + '/pac/member/saveBatchMember/' + memberQuery.regionalId"
           class="upload-demo"
           multiple>
-          <el-button type="primary">点击上传批量导入文件</el-button>
+          <el-button type="primary">点击上传批量导入文件<i class="el-icon-upload el-icon--right"/></el-button>
           <el-tooltip placement="right-end">
             <div slot="content">
               只能上传模块文件，请先下载模块文件

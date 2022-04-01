@@ -6,6 +6,7 @@
       <el-descriptions-item label="管理员角色">{{ role }}</el-descriptions-item>
     </el-descriptions>
     <el-descriptions title="社区信息" direction="vertical" border>
+      <el-descriptions-item label="社区标识ID"><el-tag size="small">{{ regionalInfo.id }}</el-tag></el-descriptions-item>
       <el-descriptions-item label="社区风险级别">
         <el-tag size="small">{{ regionalInfo.riskLevel }}</el-tag>
       </el-descriptions-item>
