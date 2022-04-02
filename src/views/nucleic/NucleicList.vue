@@ -2,23 +2,23 @@
   <div class="app-container">
 
     <!-- 条件查询 -->
-    <el-form :inline="true" class="demo-form-inline">
-      <el-form-item label="姓名">
+    <el-form :model="nucleicQuery" :inline="true" class="demo-form-inline">
+      <el-form-item prop="realName" label="姓名">
         <el-input v-model="nucleicQuery.realName" placeholder="社员姓名"/>
       </el-form-item>
 
-      <el-form-item label="次数">
-        <el-select v-model="value" clearable placeholder="请选择">
+      <el-form-item prop="agentTimes" label="剂次">
+        <el-select v-model="nucleicQuery.nucleicCount" clearable placeholder="请选择">
           <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"/>
+            v-for="num in agentTimes"
+            :key="num.value"
+            :label="num.label"
+            :value="num.value"/>
         </el-select>
       </el-form-item>
 
       <el-form-item label="毒株类型">
-        <el-select v-model="value" clearable placeholder="请选择">
+        <el-select v-model="nucleicQuery.nucleicType" clearable placeholder="请选择">
           <el-option
             v-for="item in types"
             :key="item.value"
@@ -57,13 +57,21 @@
 
       <el-table-column prop="address" label="地址" align="center"/>
 
-      <el-table-column prop="nucleicCount" label="检测次数" align="center"/>
+      <el-table-column prop="nucleicCount" label="检测剂次" align="center"/>
 
       <el-table-column prop="detectionTime" label="检测时间" align="center"/>
 
-      <el-table-column prop="status" label="感染状态" align="center"/>
+      <el-table-column prop="status" label="感染状态" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.status === 1 ? '阳性' : '阴性' }}
+        </template>
+      </el-table-column>
 
-      <el-table-column prop="nucleicType" label="毒株类型" align="center"/>
+      <el-table-column prop="nucleicType" label="毒株类型" align="center">
+        <template slot-scope="scope">
+          {{ selectType(scope.row.nucleicType) }}
+        </template>
+      </el-table-column>
 
       <el-table-column label="检测凭证" width="180" align="center">
         <template slot-scope="scope">
@@ -108,9 +116,12 @@ export default {
       nucleicQuery: {
         realName: '',
         regionalId: '1461218798756454402',
-        begin: ''
+        begin: '',
+        nucleicCount: '',
+        nucleicType: ''
       },
-      options: [{
+
+      agentTimes: [{
         value: '1',
         label: '第一次'
       }, {
@@ -140,9 +151,11 @@ export default {
         label: '德尔塔毒株'
       }, {
         value: '5',
+        label: '奥密克戎毒株'
+      }, {
+        value: '6',
         label: '混合型毒株'
-      }],
-      value: ''
+      }]
     }
   },
 
@@ -164,6 +177,25 @@ export default {
         .catch(error => { // 失败
           console.log(error)
         })
+    },
+
+    selectType(index) {
+      switch (index) {
+        case '1':
+          return '阿尔法毒株'
+        case '2':
+          return '贝塔毒株'
+        case '3':
+          return '伽马变异株'
+        case '4':
+          return '德尔塔毒株'
+        case '5':
+          return '奥密克戎毒株'
+        case '6':
+          return '混合型毒株'
+        default:
+          return 'X'
+      }
     }
 
   }

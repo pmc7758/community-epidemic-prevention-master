@@ -10,6 +10,14 @@
         <el-button type="primary" icon="el-icon-search" @click="getVaccinesListByPage()">查询</el-button>
       </el-form-item>
 
+      <el-form-item>
+        <el-input-number v-model="num" :min="1" :max="50" label="接种剂次"/>
+      </el-form-item>
+
+      <el-form-item>
+        <el-button type="primary" icon="el-icon-search" @click="getVaccinesListByNum()">查询未接种第 {{ num }} 剂次的社员</el-button>
+      </el-form-item>
+
     </el-form>
 
     <!-- 信息展示 -->
@@ -64,20 +72,28 @@ export default {
       limit: 10, // 每页数据个数
       vacQuery: {
         regionalId: '1461218798756454402',
-        realName: ''
-      }
+        realName: '',
+        num: ''
+      },
+      num: '1'
     }
   },
   created() {
     this.getVaccinesListByPage()
   },
   methods: {
+    getVaccinesListByNum() {
+      this.vacQuery.num = this.num
+      this.getVaccinesListByPage()
+    },
+
     getVaccinesListByPage(current = 1) {
       this.current = current
       vacAPI.getVacListByPage(this.current, this.limit, this.vacQuery)
         .then(response => { // 成功后数据赋值给页面初始值
           this.vaccinesList = response.data.records
           this.total = response.data.total
+          this.vacQuery.num = ''
         })
     }
   }
