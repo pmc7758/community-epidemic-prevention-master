@@ -56,6 +56,24 @@
 
       <el-table-column prop="destination" label="准备去往地" align="center"/>
 
+      <el-table-column label="十四日内被诊断为新冠肺炎、疑似患者或密切接触者" width="180" prop="isDiagnosis" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.isDiagnosis === true ? '否' : '是' }}
+        </template>
+      </el-table-column>
+
+      <el-table-column label="十四日内有发热、乏力、干咳、气促等新冠症状" width="180" prop="isFallIll" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.isFallIll === true ? '否' : '是' }}
+        </template>
+      </el-table-column>
+
+      <el-table-column label="十四日内一直在低风险地区" width="150" prop="isSafeArea" align="center">
+        <template slot-scope="scope">
+          {{ scope.row.isSafeArea === false ? '否' : '是' }}
+        </template>
+      </el-table-column>
+
     </el-table>
 
     <!-- 分页 -->
@@ -102,6 +120,7 @@ export default {
         .then(response => { // 成功后数据赋值给页面初始值
           this.infoList = response.data.records
           this.total = response.data.total
+          console.log(response.data)
         })
         .catch(error => { // 失败
           console.log(error)

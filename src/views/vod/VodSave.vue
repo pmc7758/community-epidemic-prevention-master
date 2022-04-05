@@ -77,6 +77,7 @@ export default {
         vodApi.getVodInfo(this.vod.videoSourceId)
           .then(response => {
             this.vod.duration = response.data.duration
+            console.log(response.data.coverURL)
             console.log(response.data.duration)
           })
       }, 4000)
