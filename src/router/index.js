@@ -142,8 +142,8 @@ export const constantRoutes = [
     path: '/goods',
     component: Layout, // 布局
     redirect: '/goods/table',
-    name: '货物管理', // 名字注释
-    meta: { title: '货物管理', icon: '货物' }, // 显示和图标
+    name: '货物仓库', // 名字注释
+    meta: { title: '货物仓库', icon: '货物' }, // 显示和图标
     children: [
       {
         path: 'table',
@@ -156,6 +156,12 @@ export const constantRoutes = [
         name: '上架货物',
         component: () => import('@/views/goods/Save'),
         meta: { title: '上架货物', icon: '上架货物' }
+      },
+      {
+        path: 'order',
+        name: '需求订单',
+        component: () => import('@/views/goods/Order'),
+        meta: { title: '需求订单', icon: '需求订单' }
       },
       {
         path: 'edit/:id',
