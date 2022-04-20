@@ -64,6 +64,8 @@
 </template>
 
 <script>
+import registerAPI from '@/api/register'
+
 export default {
   name: 'Register',
   data() {
@@ -112,7 +114,17 @@ export default {
 
     // 邮箱激活注册
     handleRegister() {
-
+      if (this.registerUser.confirmPwd !== this.registerUser.password) {
+        this.$message.error('确认密码不一致，重新设置!')
+      } else {
+        registerAPI.registerAdmin(this.registerUser)
+          .then(response => {
+            this.$message({
+              type: 'success',
+              message: response.data
+            })
+          })
+      }
     },
 
     // 登录跳转

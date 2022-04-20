@@ -96,7 +96,6 @@ export default {
     },
     // 跳转注册页
     handleRegister() {
-      console.log()
       this.$router.push('/register')
     }
   }
