@@ -112,7 +112,10 @@ export default {
   },
 
   created() { // 页面渲染之前执行， 调用methods定义的方法
-    this.getMemberListByPage()
+    const regionalId = this.$store.getters.regionalId
+    if (regionalId !== null && regionalId !== '') {
+      this.getMemberListByPage()
+    }
   },
 
   methods: { // 创建具体的方法，调用api里面的方法

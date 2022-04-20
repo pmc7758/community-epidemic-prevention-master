@@ -61,7 +61,10 @@ export default {
   },
 
   created() {
-    this.getNoticeList()
+    const regionalId = this.$store.getters.regionalId
+    if (regionalId !== null && regionalId !== '') {
+      this.getNoticeList()
+    }
   },
 
   methods: {

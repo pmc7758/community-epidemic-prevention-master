@@ -86,7 +86,10 @@ export default {
   },
 
   created() { // 页面渲染之前执行， 调用methods定义的方法
-    this.getGoodsListByPage()
+    const regionalId = this.$store.getters.regionalId
+    if (regionalId !== null && regionalId !== '') {
+      this.getGoodsListByPage()
+    }
   },
 
   methods: { // 创建具体的方法，调用api里面的方法
