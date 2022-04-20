@@ -99,7 +99,7 @@ export default {
       current: 1, // 当前页
       limit: 10, // 每页数据个数
       tempQuery: {
-        regionalId: '1461218798756454402',
+        regionalId: this.$store.getters.regionalId,
         realName: '',
         temperature: '',
         begin: '',
@@ -120,7 +120,6 @@ export default {
         .then(response => { // 成功后数据赋值给页面初始值
           this.infoList = response.data.records
           this.total = response.data.total
-          console.log(response.data)
         })
         .catch(error => { // 失败
           console.log(error)

@@ -49,7 +49,7 @@ export default {
         title: '',
         videoSourceId: '',
         videoOriginalName: '',
-        regionalId: '1461218798756454402',
+        regionalId: this.$store.getters.regionalId,
         duration: ''
       },
       saveBtnDisabled: true,

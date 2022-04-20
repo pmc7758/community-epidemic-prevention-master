@@ -3,6 +3,7 @@ import { getToken, setToken, removeToken } from '@/utils/auth'
 
 const user = {
   state: {
+    regionalId: '',
     token: getToken(),
     id: '',
     name: '',
@@ -12,6 +13,9 @@ const user = {
   },
 
   mutations: {
+    SET_REGIONALID: (state, regionalId) => {
+      state.regionalId = regionalId
+    },
     SET_TOKEN: (state, token) => {
       state.token = token
     },

@@ -115,7 +115,7 @@ export default {
       limit: 10, // 每页数据个数
       nucleicQuery: {
         realName: '',
-        regionalId: '1461218798756454402',
+        regionalId: this.$store.getters.regionalId,
         begin: '',
         nucleicCount: '',
         nucleicType: ''

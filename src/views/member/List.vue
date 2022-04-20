@@ -106,7 +106,7 @@ export default {
       memberQuery: {
         phone: '',
         realName: '',
-        regionalId: '1461218798756454402'
+        regionalId: this.$store.getters.regionalId
       }
     }
   },

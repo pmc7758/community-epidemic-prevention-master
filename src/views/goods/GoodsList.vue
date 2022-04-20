@@ -79,7 +79,7 @@ export default {
       current: 1, // 当前页
       limit: 10, // 每页数据个数
       goodsQuery: {
-        regionalId: '1461218798756454402',
+        regionalId: this.$store.getters.regionalId,
         tradeName: ''
       }
     }
@@ -98,7 +98,6 @@ export default {
         .then(response => { // 成功后数据赋值给页面初始值
           this.goodsList = response.data.records
           this.total = response.data.total
-          console.log(this.total)
         })
         .catch(error => { // 失败
           console.log(error)

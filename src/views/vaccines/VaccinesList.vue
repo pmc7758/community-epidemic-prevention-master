@@ -71,7 +71,7 @@ export default {
       current: 1, // 当前页
       limit: 10, // 每页数据个数
       vacQuery: {
-        regionalId: '1461218798756454402',
+        regionalId: this.$store.getters.regionalId,
         realName: '',
         num: ''
       },

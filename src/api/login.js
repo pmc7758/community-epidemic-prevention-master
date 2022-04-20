@@ -3,8 +3,8 @@ import request from '@/utils/request'
 // 登录
 export function login(username, password) {
   return request({
-    // url: '/admin/acl/login',
-    url: '/pac/login',
+    url: '/admin/acl/login',
+    // url: '/pac/login',
     method: 'post',
     data: {
       username,
@@ -16,8 +16,8 @@ export function login(username, password) {
 // 获取用户信息
 export function getInfo(token) {
   return request({
-    // url: '/admin/acl/index/info',
-    url: '/pac/info',
+    url: '/admin/acl/index/info',
+    // url: '/pac/info',
     method: 'get',
     params: { token }
   })

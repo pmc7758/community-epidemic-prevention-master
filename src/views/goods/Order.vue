@@ -13,7 +13,7 @@
     </el-form>
 
     <el-table
-      :data="orderList"
+      :data="ordersList"
       border
       fit
       style="width: 100%"
@@ -84,7 +84,7 @@ export default {
       current: 1, // 当前页
       limit: 10, // 每页数据个数
       orderQuery: {
-        regionalId: '1461218798756454402',
+        regionalId: this.$store.getters.regionalId,
         status: '',
         orderId: ''
       }
@@ -99,9 +99,8 @@ export default {
       this.current = current
       goodsAPI.getOrderListByPage(this.current, this.limit, this.orderQuery)
         .then(response => { // 成功后数据赋值给页面初始值
-          this.orderList = response.data.records
+          this.ordersList = response.data.records
           this.total = response.data.total
-          console.log(this.total)
         })
         .catch(error => { // 失败
           console.log(error)

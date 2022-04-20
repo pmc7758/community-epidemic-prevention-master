@@ -40,7 +40,7 @@ export default {
       noticeList: null,
       notice: {
         id: '',
-        regionalId: '1461218798756454402',
+        regionalId: this.$store.getters.regionalId,
         notice: ''
       },
       noticeRules: { notice: [{ required: true, trigger: 'blur', message: '公告不能为空' },

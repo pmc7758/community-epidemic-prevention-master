@@ -3,7 +3,7 @@
     <el-descriptions id="adminDES" title="管理员信息" direction="vertical" border>
       <el-descriptions-item label="管理员账号">{{ name }}</el-descriptions-item>
       <el-descriptions-item label="管理员邮箱">{{ email }}</el-descriptions-item>
-      <el-descriptions-item label="管理员角色">{{ role }}</el-descriptions-item>
+      <el-descriptions-item label="管理员角色">{{ roles[0] }}</el-descriptions-item>
     </el-descriptions>
     <el-descriptions title="社区信息" direction="vertical" border>
       <el-descriptions-item label="社区标识ID"><el-tag size="small">{{ regionalInfo.id }}</el-tag></el-descriptions-item>
@@ -46,12 +46,13 @@ export default {
   methods: {
     // 查询社区信息
     getRegionalInfo() {
-      regional.getRegional(1)
+      regional.getRegional(this.id)
         .then(response => {
           if (response.data == null) {
             this.isShow = true
           } else {
             this.regionalInfo = response.data
+            this.$store.commit('SET_REGIONALID', this.regionalInfo.id)
           }
         })
     }
