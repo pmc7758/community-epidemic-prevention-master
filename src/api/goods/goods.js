@@ -48,7 +48,7 @@ export default{
   // 创建一个方式去给前端调用获取数据
   getOrderListByPage(current, limit, orderQuery) {
     return request({
-      url: `/whouse/order/getOrderListByPage//${current}/${limit}`, // 接口地址
+      url: `/whouse/order/getOrderListByPage/${current}/${limit}`, // 接口地址
       method: 'post', // 提交方式
       data: orderQuery // 用data表示用json传递，后端（@RequestBody）才能接收
     })
