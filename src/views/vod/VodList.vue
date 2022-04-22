@@ -62,7 +62,7 @@
           <el-button
             type="primary"
             size="mini"
-            icon="el-icon-edit"
+            icon="el-icon-s-promotion"
             @click="dialogVisible = true"
           >预览</el-button>
           <router-link :to="'/vod/edit/' + scope.row.id">
@@ -114,7 +114,8 @@ export default {
       vodQuery: {
         title: '',
         begin: '',
-        end: ''
+        end: '',
+        regionalId: this.$store.getters.regionalId
       }
     }
   },
@@ -132,9 +133,7 @@ export default {
         .then(response => { // 成功后数据赋值给页面初始值
           this.vodList = response.data.records
           this.total = response.data.total
-        })
-        .catch(error => { // 失败
-          console.log(error)
+          console.log(response)
         })
     },
 
