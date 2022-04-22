@@ -205,6 +205,29 @@ export const constantRoutes = [
         meta: { title: '疫苗记录', icon: '疫苗' }
       }
     ]
+  },
+
+  // 数据统计及可视化
+  {
+    path: '/statistics',
+    component: Layout, // 布局
+    redirect: '/statistics/table',
+    name: '数据统计', // 名字注释
+    meta: { title: '数据统计', icon: '数据统计' }, // 显示和图标
+    children: [
+      {
+        path: 'personnel',
+        name: '社员状况',
+        component: () => import('@/views/statistics/Personnel'), // 点击后要显示的页面路径
+        meta: { title: '社区状况', icon: '折线图' }
+      },
+      {
+        path: 'trip',
+        name: '出行状况',
+        component: () => import('@/views/statistics/Travel'), // 点击后要显示的页面路径
+        meta: { title: '出行状况', icon: '条形图' }
+      }
+    ]
   }
 
 ]
