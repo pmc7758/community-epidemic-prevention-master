@@ -217,15 +217,27 @@ export const constantRoutes = [
     children: [
       {
         path: 'personnel',
-        name: '社员状况',
+        name: '感染比例',
         component: () => import('@/views/statistics/Personnel'), // 点击后要显示的页面路径
-        meta: { title: '社区状况', icon: '折线图' }
+        meta: { title: '感染比例', icon: '折线图' }
       },
       {
         path: 'trip',
-        name: '出行状况',
-        component: () => import('@/views/statistics/Travel'), // 点击后要显示的页面路径
-        meta: { title: '出行状况', icon: '条形图' }
+        name: '毒株数目',
+        component: () => import('@/views/statistics/Strain'), // 点击后要显示的页面路径
+        meta: { title: '毒株数目', icon: '条形图' }
+      },
+      {
+        path: 'vaccination',
+        name: '疫苗状况',
+        component: () => import('@/views/statistics/Vaccination'), // 点击后要显示的页面路径
+        meta: { title: '疫苗状况', icon: '条形图' }
+      },
+      {
+        path: 'vacRatio',
+        name: '接种比例',
+        component: () => import('@/views/statistics/VaccinationRatio'), // 点击后要显示的页面路径
+        meta: { title: '接种比例', icon: '折线图' }
       }
     ]
   }

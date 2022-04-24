@@ -8,7 +8,6 @@
 import API from '@/api/statistics/statistics'
 
 export default {
-  name: 'Personnel',
   data() {
     return {
       regionalId: this.$store.getters.regionalId,
@@ -20,7 +19,7 @@ export default {
     option() {
       return {
         title: {
-          text: '社区感染新冠人数比例状况',
+          text: '社区全剂次接种疫苗比例状况',
           subtext: ' ',
           left: 'center'
         },
@@ -37,8 +36,8 @@ export default {
             type: 'pie',
             radius: '50%',
             data: [
-              { value: this.data.totalNum - this.data.prevalenceNum, name: '未感染人数' },
-              { value: this.data.prevalenceNum, name: '感染新冠人数' }
+              { value: this.data.totalNum - this.data.vaccinationsNum, name: '未全剂次接种人数' },
+              { value: this.data.vaccinationsNum, name: '全剂次接种人数' }
             ],
             emphasis: {
               itemStyle: {
@@ -54,12 +53,12 @@ export default {
   },
 
   created() {
-    this.getPrevalenceRatio()
+    this.getVaccinationStatistics()
   },
 
   methods: {
-    getPrevalenceRatio() {
-      API.getPrevalenceRatio(this.regionalId)
+    getVaccinationStatistics() {
+      API.getVaccinationStatistics(this.regionalId)
         .then(response => {
           this.data = response.data
         })

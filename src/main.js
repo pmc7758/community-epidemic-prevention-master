@@ -19,9 +19,8 @@ import { hasBtnPermission } from './utils/permission' // button permission
 import Echarts from 'vue-echarts'
 import 'echarts'
 import VueCompositionAPI from '@vue/composition-api'
-
-Vue.component('ECharts', Echarts)
 Vue.use(VueCompositionAPI)
+Vue.component('ECharts', Echarts)
 Vue.use(ElementUI, { locale })
 
 Vue.config.productionTip = false
