@@ -194,7 +194,7 @@ export default {
         case '6':
           return '混合型毒株'
         default:
-          return 'X'
+          return '未感染'
       }
     }
 
