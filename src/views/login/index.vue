@@ -48,8 +48,8 @@ export default {
   data() {
     return {
       loginForm: {
-        username: 'admin',
-        password: '111111'
+        username: '',
+        password: ''
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', message: '账号不能为空' }],
