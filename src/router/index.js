@@ -207,6 +207,23 @@ export const constantRoutes = [
     ]
   },
 
+  // 返程申请管理
+  {
+    path: '/apply',
+    component: Layout,
+    redirect: '/apply/table',
+    name: '返程审核', // 名字注释
+    meta: { title: '返程审核', icon: '审核' }, // 显示和图标
+    children: [
+      {
+        path: 'table',
+        name: '返程审核',
+        component: () => import('@/views/apply/apply'), // 点击后要显示的页面路径
+        meta: { title: '返程审核', icon: '审核' }
+      }
+    ]
+  },
+
   // 数据统计及可视化
   {
     path: '/statistics',
