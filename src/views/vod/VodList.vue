@@ -105,7 +105,7 @@ export default {
   },
   data() { // 定义变量和初始值
     return {
-      vid: 'd85de79f99fe4aebb865f1d7f4ce877c',
+      vid: '209fca25a7a545eda21b4153da7b44b9',
       dialogVisible: false,
       vodList: null,
       total: 0, // 总记录数

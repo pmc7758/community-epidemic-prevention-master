@@ -2,15 +2,19 @@
   <div class="app-container">
     <el-form ref="goods" :model="goods" :rules="goodsRules" label-width="100px">
       <el-form-item prop="tradeName" label="商品名称">
-        <el-input v-model="goods.tradeName"/>
+        <el-input v-model="goods.tradeName" placeholder="请输入商品名称"/>
       </el-form-item>
 
       <el-form-item prop="introduction" label="商品描述">
-        <el-input v-model="goods.introduction"/>
+        <el-input v-model="goods.introduction" placeholder="请输入商品描述"/>
       </el-form-item>
 
       <el-form-item prop="stock" label="库存">
-        <el-input v-model="goods.stock"/>
+        <el-input v-model="goods.stock" placeholder="请输入商品库存，单位为件"/>
+      </el-form-item>
+
+      <el-form-item prop="quantityUnit" label="件/数量">
+        <el-input v-model="goods.quantityUnit" placeholder="请输入每件商品的数量，如果商品数量单位为单件则可以不填，数量后面表明只/斤/个（10个：表示一件商品包含10个口罩）"/>
       </el-form-item>
 
       <el-form-item prop="picture" label="商品图片">
@@ -69,6 +73,7 @@ export default {
         picture: '',
         introduction: '',
         stock: '',
+        quantityUnit: '',
         auditQualification: ''
       },
       goodsRules: {
