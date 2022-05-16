@@ -14,7 +14,7 @@
       </el-form-item>
 
       <el-form-item prop="quantityUnit" label="件/数量">
-        <el-input v-model="goods.quantityUnit" placeholder="请输入每件商品的数量，如果商品数量单位为单件则可以不填，数量后面表明只/斤/个（10个：表示一件商品包含10个口罩）"/>
+        <el-input v-model="goods.quantityUnit" placeholder="请输入每件商品的数量，数量后面表明只/斤/个/件（10个：表示一件商品包含10个口罩）"/>
       </el-form-item>
 
       <el-form-item prop="picture" label="商品图片">
