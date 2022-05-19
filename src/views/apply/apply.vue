@@ -60,9 +60,21 @@
 
       <el-table-column prop="createTime" label="申请时间" align="center"/>
 
-      <el-table-column label="凭证图" width="180" align="center">
+      <el-table-column label="行程卡" width="180" align="center">
         <template slot-scope="scope">
           <el-image :src="scope.row.travelCard" style="width: 70px; height: 70px"/>
+        </template>
+      </el-table-column>
+
+      <el-table-column label="健康码" width="180" align="center">
+        <template slot-scope="scope">
+          <el-image :src="scope.row.healthCode" style="width: 70px; height: 70px"/>
+        </template>
+      </el-table-column>
+
+      <el-table-column label="核酸检测" width="180" align="center">
+        <template slot-scope="scope">
+          <el-image :src="scope.row.nucleicTest" style="width: 70px; height: 70px"/>
         </template>
       </el-table-column>
 
