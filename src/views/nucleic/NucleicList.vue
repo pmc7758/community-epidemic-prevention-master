@@ -43,6 +43,25 @@
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" @click="getNucleicTestList()">查询感染人员</el-button>
       </el-form-item>
+
+      <el-form-item>
+        <el-upload
+          ref="uploadFile"
+          :limit="1"
+          :on-success="handleSuccess"
+          :action="BASE_API + '/pac/nucleicTest/saveBatchNT/'"
+          class="upload-demo"
+          multiple>
+          <el-button type="primary">点击上传核酸检测结果文件<i class="el-icon-upload el-icon--right"/></el-button>
+          <el-tooltip placement="right-end">
+            <div slot="content">
+              只能上传模块文件
+            </div>
+            <i class="el-icon-question"/>
+          </el-tooltip>
+        </el-upload>
+      </el-form-item>
+
     </el-form>
 
     <!-- 表格显示 -->
@@ -85,7 +104,7 @@
             size="mini"
             type="danger"
             icon="el-icon-delete"
-            @click="deleteMemberById(scope.row.id)">删除</el-button>
+            @click="deleteNTById(scope.row.id)">删除</el-button>
         </template>
       </el-table-column>
 
@@ -109,6 +128,7 @@ import nucleicAPI from '@/api/nucleic/nucleic'
 export default {
   data() { // 定义变量和初始值
     return {
+      BASE_API: process.env.BASE_API, // 接口API地址,localhost:8222这个地址
       nucleicList: null,
       total: 0, // 总记录数
       current: 1, // 当前页
@@ -196,6 +216,36 @@ export default {
         default:
           return '未感染'
       }
+    },
+
+    // 批量导入
+    handleSuccess() {
+      this.$refs.uploadFile.clearFiles()
+      this.$message({
+        type: 'success',
+        message: '批量导入成功!'
+      })
+      // 刷新
+      this.getNucleicTestList()
+    },
+
+    deleteNTById(id) {
+      this.$confirm('此操作将永久删除该核酸检测结果信息, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        nucleicAPI.deleteNTById(id)
+          .then(response => { // 成功
+            // 提示信息
+            this.$message({
+              type: 'success',
+              message: '删除成功!'
+            })
+            // 刷新
+            this.getNucleicTestList()
+          })
+      })
     }
 
   }

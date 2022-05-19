@@ -11,10 +11,10 @@ export default{
     })
   },
 
-  // 删除讲师
-  deleteMemberById(id) {
+  // 删除核酸
+  deleteNTById(id) {
     return request({
-      url: `/pac/member/deleteMemberById/${id}`,
+      url: `/pac/nucleicTest/deleteNTById/${id}`,
       method: 'delete'
     })
   }
