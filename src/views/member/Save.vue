@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-form ref="member" :model="member" :rules="memberRules" label-width="50px">
       <el-form-item label="姓名" prop="realName">
-        <el-input v-model="member.realName"/>
+        <el-input v-model="member.realName" placeholder="请输入姓名"/>
       </el-form-item>
 
       <el-form-item label="性别">
@@ -13,19 +13,19 @@
       </el-form-item>
 
       <el-form-item label="年龄" prop="age">
-        <el-input v-model="member.age"/>
+        <el-input v-model="member.age" placeholder="请输入年龄"/>
       </el-form-item>
 
       <el-form-item label="电话" prop="phone">
-        <el-input v-model="member.phone"/>
+        <el-input v-model="member.phone" placeholder="请输入电话"/>
       </el-form-item>
 
       <el-form-item label="邮箱" prop="email">
-        <el-input v-model="member.email"/>
+        <el-input v-model="member.email" placeholder="请输入邮箱"/>
       </el-form-item>
 
       <el-form-item label="地址" prop="address">
-        <el-input v-model="member.address"/>
+        <el-input v-model="member.address" placeholder="请输入详细的家庭地址"/>
       </el-form-item>
 
       <el-form-item>

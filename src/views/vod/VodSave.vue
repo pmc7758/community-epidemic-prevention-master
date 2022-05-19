@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-form ref="vod" :model="vod" :rules="vodRules" label-width="80px">
       <el-form-item prop="title" label="视频标题">
-        <el-input v-model="vod.title"/>
+        <el-input v-model="vod.title" placeholder="请输入视频标题"/>
       </el-form-item>
 
       <el-form-item>
