@@ -83,7 +83,7 @@
           <el-button
             size="mini"
             type="primary"
-            icon="el-icon-delete"
+            icon="el-icon-success"
             @click="updateApplyStatus(scope.row.id, 1)">通过</el-button>
           <el-button
             size="mini"

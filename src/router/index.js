@@ -241,6 +241,23 @@ export const constantRoutes = [
     ]
   },
 
+  // 风险名单管理
+  {
+    path: '/report',
+    component: Layout,
+    redirect: '/report/table',
+    name: '风险名单', // 名字注释
+    meta: { title: '风险名单', icon: '风险' }, // 显示和图标
+    children: [
+      {
+        path: 'table',
+        name: '风险名单',
+        component: () => import('@/views/report/index'), // 点击后要显示的页面路径
+        meta: { title: '风险名单', icon: '风险' }
+      }
+    ]
+  },
+
   // 数据统计及可视化
   {
     path: '/statistics',
