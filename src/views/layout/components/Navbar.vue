@@ -13,6 +13,11 @@
             Home
           </el-dropdown-item>
         </router-link>
+        <router-link class="inlineBlock" to="/chat/chat">
+          <el-dropdown-item>
+            消息
+          </el-dropdown-item>
+        </router-link>
         <el-dropdown-item divided>
           <span style="display:block;" @click="logout">LogOut</span>
         </el-dropdown-item>

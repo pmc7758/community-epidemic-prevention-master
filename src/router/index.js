@@ -90,6 +90,23 @@ export const constantRoutes = [
     ]
   },
 
+  {
+    path: '/chat',
+    component: Layout, // 布局
+    redirect: '/chat/table',
+    name: '在线聊天', // 名字注释
+    meta: { title: '在线聊天', icon: '视频' }, // 显示和图标
+    hidden: true,
+    children: [
+      {
+        path: 'chat',
+        name: '聊天',
+        component: () => import('@/views/chat/Chat'), // 点击后要显示的页面路径
+        meta: { title: '在线聊天', icon: '视频列表' },
+        hidden: true
+      }]
+  },
+
   // 视频管理
   {
     path: '/video',
