@@ -1,6 +1,18 @@
 <template>
   <div class="block app-container">
     <!-- 条件查询 -->
+    <el-form :inline="true" class="demo-form-inline">
+      <el-form-item label="公告类型">
+        <el-select v-model="notice.type" clearable placeholder="请选择">
+          <el-option
+            v-for="type in noticeType"
+            :key="type.value"
+            :label="type.label"
+            :value="type.value"/>
+        </el-select>
+      </el-form-item>
+    </el-form>
+    <!-- 条件查询 -->
     <el-form ref="notice-form" :inline="false" :model="notice" :rules="noticeRules" class="demo-form-inline">
       <el-form-item label="公告内容" prop="notice">
         <el-input v-model="notice.notice" placeholder="公告内容"/>
@@ -18,7 +30,7 @@
         :timestamp="notices.createTime"
         placement="top">
         <el-card>
-          <h4>{{ notices.notice }}</h4>
+          <h4>{{ notices.notice }} <el-tag type="primary">{{ formType(notices.type) }}</el-tag> </h4>
           <el-button style="float: right;margin-bottom: 5px; padding: 8px 5px" icon="el-icon-delete" type="danger" size="normall" @click="deleteNoticeById(notices.id)">删除</el-button>
           <router-link :to="'/notice/edit/' + notices.id">
             <el-button style="float: right;margin-bottom: 5px; margin-right: 8px; padding: 8px 5px" icon="el-icon-edit" type="primary" size="normall">修改</el-button>
@@ -41,8 +53,16 @@ export default {
       notice: {
         id: '',
         regionalId: this.$store.getters.regionalId,
-        notice: ''
+        notice: '',
+        type: ''
       },
+      noticeType: [{
+        value: '1',
+        label: '通知公告'
+      }, {
+        value: '2',
+        label: '风险确认公告'
+      }],
       noticeRules: { notice: [{ required: true, trigger: 'blur', message: '公告不能为空' },
         { max: 200, message: '长度在 200 个字符之内', trigger: 'blur' }] }
     }
@@ -73,6 +93,13 @@ export default {
         .then(response => {
           this.noticeList = response.data
         })
+    },
+
+    formType(value) {
+      if (value === '1') {
+        return '通知公告'
+      }
+      return '风险确认公告'
     },
 
     saveOrUpdateNotice() {
