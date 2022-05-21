@@ -1,4 +1,5 @@
 import request from '@/utils/request'
+import qs from 'qs'
 
 export default{
 
@@ -10,11 +11,26 @@ export default{
     })
   },
 
-  // 删除核酸
+  // 删除风险名单
   deleteReportById(id) {
     return request({
       url: `/pac/regionalReport/deleteReportById/${id}`,
       method: 'delete'
+    })
+  },
+
+  // 邮件通知
+  sendEmailForInfo(email, information) {
+    return request({
+      url: `/email/information`,
+      method: 'post',
+      data: qs.stringify({
+        email: email,
+        information: information
+      }),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded'
+      }
     })
   }
 

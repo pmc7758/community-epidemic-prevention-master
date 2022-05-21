@@ -17,7 +17,7 @@
             size="mini"
             type="warning"
             icon="el-icon-phone"
-            @click="ReportByEmail(scope.row.id)">邮件通知</el-button>
+            @click="ReportByEmail(scope.row.email)">邮件通知</el-button>
           <el-button
             size="mini"
             type="danger"
@@ -80,6 +80,25 @@ export default {
             // 刷新
             this.getReportListByPage()
           })
+      })
+    },
+    ReportByEmail(email) {
+      this.$prompt('请输入相关通知信息', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消'
+      }).then(({ value }) => {
+        reportAPI.sendEmailForInfo(email, value)
+          .then(response => {
+            this.$message({
+              type: 'success',
+              message: '信息邮件已发送'
+            })
+          })
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '取消输入'
+        })
       })
     }
   }
