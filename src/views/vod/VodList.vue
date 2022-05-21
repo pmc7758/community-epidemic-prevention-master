@@ -38,7 +38,11 @@
       :visible.sync="dialogVisible"
       title="提示"
       width="70%">
-      <palyer :vid = "vid"/>
+      <!-- <palyer :vid = "vid"/> -->
+      <video autobuffer muted controls>
+        <source src="./share_d7f393d72a9d30ae2cf0aed2b2937582.mp4" type="video/mp4">
+        你就用这个浏览器有出息吗？
+      </video>
     </el-dialog>
 
     <!-- 列表展示 -->
@@ -96,13 +100,13 @@
 
 <script>
 import vodApi from '@/api/vod/vod'
-import palyer from '../player/_vid.vue'
+/* import palyer from '../player/_vid.vue' */
 
 export default {
 
-  components: {
+/*   components: {
     'palyer': palyer
-  },
+  }, */
   data() { // 定义变量和初始值
     return {
       vid: '209fca25a7a545eda21b4153da7b44b9',
