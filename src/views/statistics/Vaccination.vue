@@ -1,5 +1,21 @@
 <template>
   <div class="app-container">
+    <!-- 导出 -->
+    <el-form :inline="true" class="demo-form-inline">
+
+      <el-form-item>
+        <el-button type="primary" icon="el-icon-download" @click="export1()">导出未接种疫苗名单</el-button>
+      </el-form-item>
+
+      <el-form-item>
+        <el-button type="primary" icon="el-icon-download" @click="export2()">导出未接种第二次疫苗名单</el-button>
+      </el-form-item>
+
+      <el-form-item>
+        <el-button type="primary" icon="el-icon-download" @click="export3()">导出未接种第三次疫苗名单</el-button>
+      </el-form-item>
+
+    </el-form>
     <e-charts :option="option" class="chart"/>
   </div>
 </template>
@@ -76,6 +92,15 @@ export default {
         .then(response => {
           this.data = response.data
         })
+    },
+    export1() {
+      window.location.href = 'http://localhost:8222/statistics/export/1/' + this.regionalId
+    },
+    export2() {
+      window.location.href = 'http://localhost:8222/statistics/export/2/' + this.regionalId
+    },
+    export3() {
+      window.location.href = 'http://localhost:8222/statistics/export/3/' + this.regionalId
     }
   }
 
